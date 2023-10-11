@@ -30,10 +30,44 @@ class CustomJSONProvider(JSONProvider):
 
 app.json = CustomJSONProvider(app)
 
+# 페이지 라우트. 총 7개의 페이지로 구성된다
+
 
 @app.route('/')
-def home():
-    return render_template('index.html')
+def index():
+    return render_template('index.html')  # 선물 목록 페이지
+
+
+@app.route('/login')
+def login():
+    return render_template('login.html')  # 로그인 페이지
+
+
+@app.route('/gift/<id>')
+def gift(id):
+    return render_template('gift.html')  # 선물 상세 페이지
+
+
+@app.route('/recipient')
+def recipient():
+    return render_template('recipient.html')  # 수령인 선택 페이지
+
+
+@app.route('/notification')
+def notification_list():
+    return render_template('notification_list.html')  # 알림 목록 페이지
+
+
+@app.route('/notification/<id>')
+def notification():
+    return render_template('notification.html')  # 알림 상세 페이지
+
+
+@app.route('/received_gift')
+def received_gift():
+    return render_template('received_gift.html')  # 받은 선물함 페이지
+
+# API 라우트. 페이지의 구현에 따라 추가한다
 
 
 if __name__ == '__main__':
