@@ -1,0 +1,122 @@
+[
+  {
+    "name": "10월 13일 점심(학식)",
+    "category": { "name": "식사" },
+    "description": "10월 13일 점심 식사를 고마운 정글러에게 선물합니다.",
+    "url": "../images/food.webp"
+  },
+  {
+    "name": "10월 13일 저녁(학식)",
+    "category": { "name": "식사" },
+    "description": "10월 13일 저녁 식사를 고마운 정글러에게 선물합니다.",
+    "url": "../images/food.webp"
+  },
+  {
+    "name": "10월 13일 저녁(야식)",
+    "category": { "name": "식사" },
+    "description": "10월 13일 야식를 고마운 정글러에게 선물합니다.",
+    "url": "../images/food.webp"
+  },
+  {
+    "name": "10월 13일 점심(외식)",
+    "category": { "name": "식사" },
+    "description": "10월 13일 점심 식사를 고마운 정글러에게 선물합니다.",
+    "url": "../images/food.webp"
+  },
+  {
+    "name": "10월 13일 저녁(외식)",
+    "category": { "name": "식사" },
+    "description": "10월 13일 저녁 식사를 고마운 정글러에게 선물합니다.",
+    "url": "../images/food.webp"
+  },
+  {
+    "name": "10월 14일 점심(학식)",
+    "category": { "name": "식사" },
+    "description": "10월 14일 점심 식사를 고마운 정글러에게 선물합니다.",
+    "url": "../images/food.webp"
+  },
+  {
+    "name": "10월 14일 저녁(학식)",
+    "category": { "name": "식사" },
+    "description": "10월 14일 저녁 식사를 고마운 정글러에게 선물합니다.",
+    "url": "../images/food.webp"
+  },
+  {
+    "name": "10월 14일 점심(외식)",
+    "category": { "name": "식사" },
+    "description": "10월 14일 점심 식사를 고마운 정글러에게 선물합니다.",
+    "url": "../images/food.webp"
+  },
+  {
+    "name": "10월 14일 저녁(외식)",
+    "category": { "name": "식사" },
+    "description": "10월 14일 저녁 식사를 고마운 정글러에게 선물합니다.",
+    "url": "../images/food.webp"
+  },
+  {
+    "name": "10월 15일 점심(학식)",
+    "category": { "name": "식사" },
+    "description": "10월 15일 점심 식사를 고마운 정글러에게 선물합니다.",
+    "url": "../images/food.webp"
+  },
+  {
+    "name": "10월 15일 저녁(학식)",
+    "category": { "name": "식사" },
+    "description": "10월 15일 저녁 식사를 고마운 정글러에게 선물합니다.",
+    "url": "../images/food.webp"
+  },
+  {
+    "name": "10월 15일 점심(외식)",
+    "category": { "name": "식사" },
+    "description": "10월 15일 점심 식사를 고마운 정글러에게 선물합니다.",
+    "url": "../images/food.webp"
+  },
+  {
+    "name": "10월 15일 저녁(외식)",
+    "category": { "name": "식사" },
+    "description": "10월 15일 저녁 식사를 고마운 정글러에게 선물합니다.",
+    "url": "../images/food.webp"
+  },
+  {
+    "name": "10월 13일 커피 한 잔",
+    "category": { "name": "커피" },
+    "description": "10월 13일 고마운 정글러에게 커피 한 잔 선물합니다.",
+    "url": "../images/food.webp"
+  },
+  {
+    "name": "10월 14일 커피 한 잔",
+    "category": { "name": "커피" },
+    "description": "10월 14일 고마운 정글러에게 커피 한 잔 선물합니다.",
+    "url": "../images/food.webp"
+  },
+  {
+    "name": "10월 15일 커피 한 잔",
+    "category": { "name": "커피" },
+    "description": "10월 15일 고마운 정글러에게 커피 한 잔 선물합니다.",
+    "url": "../images/food.webp"
+  },
+  {
+    "name": "10월 13일 편의점 5천원",
+    "category": { "name": "편의점" },
+    "description": "10월 13일 고마운 정글러에게 편의점을 쏩니다.",
+    "url": "../images/food.webp"
+  },
+  {
+    "name": "10월 14일 편의점 7천원",
+    "category": { "name": "편의점" },
+    "description": "10월 14일 고마운 정글러에게 편의점을 쏩니다.",
+    "url": "../images/food.webp"
+  },
+  {
+    "name": "10월 15일 문구 1만원",
+    "category": { "name": "문구" },
+    "description": "10월 15일 고마운 정글러에게 문구를 선물합니다.",
+    "url": "../images/food.webp"
+  },
+  {
+    "name": "랜덤 선물",
+    "category": { "name": "스페셜" },
+    "description": "운을 시험해보세요",
+    "url": "../images/food.webp"
+  }
+]

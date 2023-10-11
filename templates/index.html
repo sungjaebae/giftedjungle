@@ -1,12 +1,43 @@
-<!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
+{% extends "layout/head.html" %} {% block title %} {{ super() }} 선물 목록 {%
+endblock %} {% block container %}
+<div>
+  <div class="category-list">
+    {% for category in categories %}
+    <div
+      class="category-name"
+      onclick="getGiftsOfCategory('{{ category._id }}')"
+    >
+      {{category.name}}
+    </div>
+    {% endfor %}
+  </div>
+  <div class="gift-list">
+    <div class="gift">
+      <div class="gift-img">
+        <img src="https://via.placeholder.com/150" alt="선물 이미지" />
+      </div>
+      <div class="gift-info">
+        <div class="gift-name">선물 이름</div>
+        <div class="gift-price">선물 가격</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block script %}
+<script>
+  async function getGiftsOfCategory(id) {
+    res = await fetch(`/api/category/${id}`);
+    data = await res.json();
+    renderGists(data);
+  }
 
-    <meta title="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gifted Jungle</title>
-  </head>
-  <body>
-    선물 목록 페이지
-  </body>
-</html>
+  function renderGists(gifts) {
+    gift_list = document.querySelector(".gift-list");
+    gift_list.innerHTML = "";
+    for (gift of gifts) {
+      gift = `name: ${gift.name}, description: ${gift.description}, url: ${gift.url}`;
+      gift_list.innerHTML += gift;
+    }
+  }
+</script>
+{% endblock %}
