@@ -1,12 +1,31 @@
-<!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
+{% extends "layout/head.html" %} {% block title %} {{ super() }} 선물 상세
+페이지 {% endblock %} {% block content %}
 
-    <meta title="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gifted Jungle</title>
-  </head>
-  <body>
-    선물 상세 페이지
-  </body>
-</html>
+<div class="card g-0">
+  <img src="{{ gift.url }}" class="card-img-top" alt="${gift.name}" />
+  <div class="card-body">
+    <h5 class="card-title">{{gift.name}}</h5>
+    <p class="card-text">{{gift.description}}</p>
+  </div>
+</div>
+<form action="/recipient" method="POST">
+  <input hidden name="gift_id" value="${{gift._id}}" />
+  <div class="mb-3 mt-3">
+    <label for="message" class="form-label">선물 메시지</label>
+    <textarea
+      class="form-control"
+      name="message"
+      id="message"
+      rows="3"
+    ></textarea>
+  </div>
+  <div class="d-grid gap-2">
+    <button type="submit" class="btn btn-primary">
+      <div style="display: flex; align-items: center; justify-content: center">
+        <span class="ico_common2 ico_gift"></span>
+        <span style="font-size: 20px">선물하기</span>
+      </div>
+    </button>
+  </div>
+</form>
+{% endblock %}

@@ -1,12 +1,66 @@
-<!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
+{% extends "layout/head.html" %} {% block title %} {{ super() }} 선물 목록 {%
+endblock %} {% block content %}
+<div class="container g-0">
+  <div class="row g-0">
+    <div class="col-3">
+      <ul class="category-list list-group">
+        {% for category in categories %}
+        <li
+          class="category-item list-group-item"
+          style="
+            text-align: center;
+            line-height: 3;
+            font-size: 1.5rem;
+            cursor: pointer;
+          "
+          onclick="getGiftsOfCategory(event, '{{ category._id }}')"
+        >
+          {{category.name}}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="gift-list col-9"></div>
+  </div>
+</div>
+{% endblock %} {% block script %}
+<script>
+  window.addEventListener("load", function () {
+    document.querySelector(".category-item").click();
+  });
 
-    <meta title="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gifted Jungle</title>
-  </head>
-  <body>
-    선물 목록 페이지
-  </body>
-</html>
+  async function getGiftsOfCategory(e, id) {
+    const categoryItems = document.querySelectorAll(".category-item");
+    for (let categoryItem of categoryItems) {
+      categoryItem.classList.remove("active");
+    }
+    e.target.classList.add("active");
+
+    res = await fetch(`/api/category/${id}`);
+    data = await res.json();
+    renderGifts(data);
+  }
+
+  function renderGifts(gifts) {
+    const giftList = document.querySelector(".gift-list");
+    let renderedGifts = "";
+    for (let gift of gifts) {
+      const renderedGift = renderGift(gift);
+      renderedGifts += renderedGift;
+    }
+    giftList.innerHTML = renderedGifts;
+  }
+
+  function renderGift(gift) {
+    const renderedGift = `<div class="card g-0">
+  <img src='${gift.url}' class="card-img-top" alt='${gift.name}'/>
+  <div class="card-body">
+    <h5 class="card-title">${gift.name}</h5>
+    <p class="card-text">${gift.description}</p>
+    <a href="/gift/${gift._id}" class="btn btn-primary">선물하러 가기</a>
+  </div>
+</div>`;
+    return renderedGift;
+  }
+</script>
+{% endblock %}

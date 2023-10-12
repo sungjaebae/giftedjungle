@@ -1,0 +1,14 @@
+<!-- 모바일 화면을 상속받아 네비게이션 바 추가 -->
+
+{% extends "layout/base.html" %} {% block title %} {{ super() }} {% endblock %}
+{% block head %}
+<div class="group_head">
+  <h1 class="title"><a href="/">Gifted Jungle</a></h1>
+  <nav class="navbar">
+    <a href="#notification"
+      ><span class="ico_common ico_notification"></span
+    ></a>
+    <a href="#received_gift"><span class="ico_common ico_gift"></span></a>
+  </nav>
+</div>
+{% endblock %}
