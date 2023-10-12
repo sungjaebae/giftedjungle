@@ -59,9 +59,10 @@ html {
 .title {
   text-decoration: none;
   line-height: 80px;
+  margin: auto 0;
 }
 
-.navbar {
+._navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -104,6 +105,15 @@ html {
   background-size: 200px 170px;
   background-position: -122px -42px;
 }
+.icoback{
+  margin-top : 18px;
+}
+.ico_back{
+  overflow: hidden;
+  color: trasnparent;
+  background: url("./../icons/arrow.png") no-repeat;
+  background-size: 26px 26px;
+}
 
 .category-list {
   overflow-y: auto;
@@ -131,3 +141,17 @@ html {
 .list-item-image{
   float:left;
 }
+.list{
+  display:static;
+}
+
+.list-item-title{
+  margin-left:80px;
+}
+.list-item-description{
+  margin-left:80px;
+}
+.delete{
+  display:hidden;
+}
+

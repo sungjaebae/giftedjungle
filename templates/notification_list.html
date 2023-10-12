@@ -2,12 +2,14 @@
   endblock %}
     
   {% block head %}
+  
     <div class="group_head">
-      <i class="fa-solid fa-arrow-left" style="color: #ffffff;"></i>
-      <h1 class="title"><a href="#">알림 목록</a></h1>
-      <nav class="navbar">
-        <a href="#notification"><span class="ico_common ico_notification"></span></a>
-        <a href="#received_gift"><span class="ico_common ico_present"></span></a>
+      <a href="javascript:window.history.back();" class="icoback"><span class="ico_common ico_back"></span></a>
+      <h1 class="title">알림 목록</h1>
+      <nav class="_navbar">
+        <a href="/mypage"><span class="ico_common ico_mypage"></span></a>
+        <a href="/notification" onclick="location.href='notification.html'"><span class="ico_common ico_notification"></span></a>
+        <a href="/received_gift" onclick="location.href='received_gift.html'"><span class="ico_common ico_gift"></span></a>
       </div>
     </div>
   {% endblock %}
@@ -15,42 +17,55 @@
     
   {% block content %}
   <div class="list">
+    {%for i in range (notifications|count)%}
     <div style="cursor:pointer;" class="list-item" onclick=location.href='{{url_for("notification.notification_detail",notif_id=10)}}'>
       <div class="list-item-image">
         <figure class="image is-64x64">
           <img class="is-rounded" src="https://via.placeholder.com/128x128.png?text=Image">
         </figure>
       </div>
-  
-      <div class="list-item-content">
-        <div class="list-item-title">김 훈 이</div>
-        <div class="list-item-description">{{notifications[0]['giftname']}}을 선물했습니다.</div>
-      </div>
-    </div>
-  
-    <div class="list-item">
-      <div class="list-item-image">
-        <figure class="image is-64x64">
-          <img class="is-rounded" src="https://via.placeholder.com/128x128.png?text=Image">
-        </figure>
-      </div>
-  
-      <div class="list-item-content">
-        <div class="list-item-title">List item</div>
-        <div class="list-item-description">List item description</div>
-      </div>
-    </div>
-  
-    <div class="list-item">
-      <div class="list-item-image">
-        <figure class="image is-64x64">
-          <img class="is-rounded" src="https://via.placeholder.com/128x128.png?text=Image">
-        </figure>
-      </div>
-  
-      <div class="list-item-content">
-        <div class="list-item-title">List item</div>
-        <div class="list-item-description">List item description</div>
-      </div>
-    </div>
-  {% endblock %}
+      
+            <!-- 내가 보낸 선물인 경우 -->
+            {% if(notifications[i]['sndusrid'] == 2) %} <!-- myid=2 -->
+            <div class="list-item-content">
+              <div class="list-item-title">{{notifications[i]['rcv-usr-name']}}</div>
+              
+              <!-- 상대방이 확인하고 수락한 경우-->
+              {% if((notifications[i]['isccheck']==1)and(notifications[i]['isccheck']==1)): %}
+              <div class="list-item-description">님이 {{notifications[0]['gift-name']}} 선물을 수락했습니다.</div>
+      
+              <!-- 상대방이 확인하고 거절한 경우-->
+              {% elif((notifications[i]['isccheck']==1) and (notifications[i]['isccheck']==0)):%}
+              <div class="list-item-description">님이 {{notifications[0]['giftname']}} 선물을 거절했습니다.</div>
+              
+              {% else %}
+              <div class="list-item-description">error: notification_status</div>
+              {% endif %}
+            </div>
+      
+            <!-- 내가 받은 선물인 경우 -->
+            {% elif(notifications[i]['rcvusrid'] == 2) %} <!-- myid=2 -->
+            <div class="list-item-content">
+              <div class="list-item-title">  {{notifications[i]['sndusrname']}}</div>
+              
+              <!-- 내가 확인하지 않은 경우-->
+              {% if(notifications[i]['ischeck']==0) %}
+              <div class="list-item-description">님으로부터 {{notifications[0]['giftname']}} 선물이 도착했습니다.</div>        
+              
+              <!-- 내가 확인한 경우 -->
+              {% elif(notifications[i]['ischeck']==1) %}
+              <div class="list-item-description">님이 {{notifications[0]['sndusrname']}} 님의 선물을 확인했습니다.</div>
+      
+              {% else %}
+              <div class="list-item-description">error: notification_isaccept_status</div>
+              
+              {% endif %}
+            </div>
+      
+            {%else%}
+            <div class="list-item-title">ERROR</div>
+            <div class="list-item-description">rcv/snd usr</div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endblock %}

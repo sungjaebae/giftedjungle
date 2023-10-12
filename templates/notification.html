@@ -1,20 +1,22 @@
-<!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
+{% extends "layout/head.html" %} {% block title %} {{ super() }} 알림 상세
+페이지 {% endblock %} {% block content %}
 
-    <meta title="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gifted Jungle</title>
-  </head>
-  <body>
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="..." alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">{{notificationdetail['sentusr']}}</h5>
-        <p class="card-text">{{notificationdetail['giftmsg']}}</p>
-        <a href='{{url_for("notification.update_accept_received",notif_id=10)}}' class="btn btn-primary">수락</a>
-        <a href = "http://localhost:5000/notification" class="btn btn-primary">거절</a>
-      </div>
-    </div>
-  </body>
-</html>
+<div class="card g-0">
+  <img src="{{ notificationdetail.url}}" class="card-img-top" alt="$({{notificationdetail.giftname}})"/>
+  <div clas="card-body">
+  </div>
+</div>
+<article class="message is-success" style="margin-top : 5px">
+  <div class="message-header">
+    <p style="font-size:1.2rem">{{notificationdetail['giftname']}} - {{notificationdetail['sndusrname']}}</p>
+  </div>
+  <div style="font-size:1.0rem" class="message-body">{{notificationdetail['giftmsg']}} </div>
+</article>
+<div class="d-grid gap-2">
+  <div class="btn-group" role="group" aria-label="Basic mixed styles example" style = "font-size:1.0rem; margin: 0px 80px;">
+    <button type="button" class="btn btn-success" onclick=location.href="{{url_for('notification.update_accept_received',notif_id=notificationdetail['notif_id'])}}">수락</button>
+    <button type="button" class="btn btn-danger" onclick="history.back()" class="btn btn-primary" >거절</button>
+  </div>
+</div>
+
+{% endblock %}

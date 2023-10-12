@@ -30,6 +30,7 @@ def insert_user():
 def insert_notification():
     doc ={
         'notif_id' : 10,
+        'url' : "../static/images/food.webp",
         #'gift-img' : "/img/launch.jpg",
         'giftname' : "10월 15일 점심",
         'giftmsg' : "밥먹자",
