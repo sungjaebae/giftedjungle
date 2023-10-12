@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Bulma-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!--구글폰트-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-latest.js"></script> 
+    <title>마이페이지</title>
+</head>
+<style>
+    .top {font-family: 'Gamja Flower', cursive;}
+
+    #stuff{
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 500px;
+    margin: auto;
+    
+    }
+    .top .title{
+    font-size: 60px;
+    text-align: center;
+    }
+    .main{
+    padding: 50px 150px;
+    }
+    .main .tfield{
+    width:500px;
+    margin:auto;
+    padding: 10px 0px;
+    }
+    .main .control01{
+    width: 500px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+    }
+    .main .control01 #input01{
+    width: 400px;
+    }
+    .main .control01 .button{
+    width: 80px;
+    }
+    .main .main01 .field .label{
+    font-weight: bold;
+    font-size: 23px;
+    padding-bottom: 20px;
+    } 
+    
+    .main .main002{
+    padding: 10px;
+    
+    }
+    .bottom{
+    padding: 20px 10px;
+    
+    }.bottom .control{
+    padding: 10px;
+    
+    }
+</style>
+<script>
+    function logout() {
+// 서버에 로그아웃 요청을 보내고 성공하면 로컬 스토리지 또는 쿠키에서 토큰을 삭제하고 로그아웃 처리
+        $.ajax({
+            type: "POST",
+            url: "/mypage/logout",
+            success: function (response) {
+            if (response["result"] == "success") {
+                // 로컬 스토리지 또는 쿠키에서 토큰을 삭제
+                $.cookie('mytoken', null);
+                alert("로그아웃 되었습니다.");
+                window.location.href = '/login';
+            }
+            }
+        });
+    }
+
+    function edit() {
+        let pw = $("#pw").val();
+
+        $.ajax({
+        type: "POST",
+        url: "/mypage/edit",
+        data: {
+            'pw_give': pw,
+        },
+        success: function(response) {
+            if (response["result"] == "success") {
+            alert("수정완료 되었습니다.");
+            window.location.href = '/'
+            }
+        }
+        });
+    }
+    function cancel(){
+        window.location.href = '/'
+        }
+</script>
+<body>
+    <div class="wrap">
+    <div class="top">
+        <section class="hero is-info">
+        <div class="hero-body">
+            <p class="title">마이페이지</p>
+        </div>
+        </section>
+    <div class="main">
+        <div id="main01" class="main01">
+            <div class="tfield">
+                <label class="label">이름</label>
+                <div class="control">
+                    <input id="id" class="input" type="text" value="{{user_info.name}}" readonly>
+                </div>
+            </div>
+            <div class="tfield">
+                <label class="label">ID</label>
+                <div class="control">
+                    <input id="id" class="input" type="text" value="{{user_info.id}}" readonly>
+                </div>
+            </div>
+            <div class="tfield">
+                <label class="label">PW</label>
+                <div class="control">
+                <input id="pw" class="input" type="text" value="{{user_info.pw}}">
+                </div>
+            </div>
+    <div class="bottom">
+        <div class="field is-grouped" style="justify-content: center;">
+            <div class="control">
+            <button class="button is-info" onclick="edit()">수정</button>
+            </div>
+            <div class="control">
+            <button class="button is-info is-light" onclick="cancel()">취소</button>
+            </div>
+            <div class="control">
+            <button class="button is-info is-light" onclick="logout()">로그아웃</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
