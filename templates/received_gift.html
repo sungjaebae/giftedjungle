@@ -2,11 +2,37 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-
+  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css" />
+  
+    <script defer src="https://use.fontawesome.com/releases/v6.4.0/js/all.js"></script>
     <meta title="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gifted Jungle</title>
   </head>
   <body>
-    받은 선물함 페이지
+    <div class="list">
+      {%for i in range (received|count)%}
+      <div class ="list-item">
+        <div class="list-item-image">
+          <figure class="image is-64x64">
+            <!--/C:\Users\푸린\Desktop\activity\jungle\0주차\giftedjungle\templates\img\launch.jpeg-->
+            <img src="{{received[i]['giftimg']}}">
+          </figure>
+          <div class="list-item-content">
+            <div class="list-item-title">{{received[i]['giftname']}}</div>
+            <div class="list-item-description">
+              <!--<img src = "C:\Users\푸린\Desktop\activity\jungle\0주차\giftedjungle\templates\img\usrimg.jpeg">-->
+              <img src = "{{received[i]['sentusrimg']}}">{{sentusrname}}</div>
+              <div>{{received[i]['sentusrname']}}</div>
+            </div>
+        </div>
+      </div>
+      {%endfor%}
+    </div>
   </body>
 </html>
