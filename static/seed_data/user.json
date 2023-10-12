@@ -1,5 +1,17 @@
 [
-  { "name": "배성재", "username": "hsm0156", "password": "zxcv" },
-  { "name": "이서영", "username": "user1", "password": "zxcv" },
-  { "name": "조윤성", "username": "user2", "password": "zxcv" }
+  {
+    "id": "qwer1",
+    "pw": "asdf1",
+    "name": "배성재"
+  },
+  {
+    "id": "qwer2",
+    "pw": "asdf2",
+    "name": "이서영"
+  },
+  {
+    "id": "qwer3",
+    "pw": "asdf3",
+    "name": "조윤성"
+  }
 ]

@@ -6,9 +6,9 @@ from datetime import datetime, timedelta
 authentication = Blueprint('authentication', __name__)
 SECRET_KEY = 'JUNGLE'
 
-client = MongoClient('localhost', 27017)
+client: MongoClient = MongoClient('localhost', 27017)
 db = client.dbgiftedjungle
- 
+
 
 @authentication.route('/login', methods=['GET', 'POST'])
 def login():
@@ -110,6 +110,3 @@ def logout():
         return response
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '토큰 디코딩 오류'})
-
-
- 
