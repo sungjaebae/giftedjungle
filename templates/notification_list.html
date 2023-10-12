@@ -35,103 +35,12 @@
       height: 30px;
     }
 
+    .list-item-title{
+      font-size: 1.7rem;
+    }
   </style>
 
   <script>
-    // let myid=2
-    // $(document).ready(function(){ 
-    //   let bellMode = false     
-      
-    //   /* 리스트 목록 게시 */
-    //   shownotificationList()
-
-    //   /* 조회 여부에 따라 알람 아이콘 변경 */
-    //   // displayBellMode(bellMode)
-    // });
-
-    // function shownotificationList(){
-
-    //   // // 리스트 박스 내부 태그 삭제
-    //   // $('#list-box').empty()
-
-    //   // $.ajax({
-    //   //   type: "GET",
-    //   //   url: "/notification",
-    //   //   data: {"myid" : 2},
-    //   //   // success: function(response){
-    //   //   //   if(response['result']!='success'){
-    //   //   //     alert('알람 리스트 받아오기 실패.')
-    //   //   //     return
-    //   //   //   }
-
-    //   //     let notifications = {{notification_list}}
-    //   //     addnotificationLists(notifications, myid)
-    //   //   },
-    //   // })
-
-    // }
-
-    // function addnotificationLists(notifications, myid){
-    //   if(notifications == null){
-    //     alert("알람이 존재하지 않습니다!")
-    //   }
-
-    //   else{
-    //     for(let i = 0; i<notifications.length;i++){
-    //       let notification  = notifications[i]
-    //       let giftname = notification['giftname']
-    //       let giftmsg = notification['giftmsg']
-    //       let sentusr = notification['sentusr']
-    //       let receiptionusr = notification['receiptionusr']
-    //       let ischeck = notification['ischeck']
-    //       let isaccept = notification['isaccept']
-    //     }
-
-    //     let listProfileHtml = `<img src="${usrimg}" class="usrimg">`
-    //     let listTitleHtml
-    //     let listSubHtml
-
-    //     if(sentusr==myid){
-    //       listTitleHtml =`<span class="receptionname">${receiptionusr}</span>`
-    //       if(ischeck==true){
-    //         switch(isaccept){
-    //           case true:
-    //           listSubHtml = `<span class = "giftinfo">"${giftname}을 수락했습니다."</span>`
-    //           break;
-
-    //           case false:
-    //           listSubHtml = `<span class = "giftinfo">"${giftname}을 거절했습니다."</span>`  
-    //           break;
-
-    //           default:
-    //           alert("isaccept 오류!")
-    //           return
-    //         }
-    //       }
-    //       else if(ischeck==false){
-    //         listSubHtml = `<span class = "giftinfo">"${giftname} 선물하는 중입니다."</span>`
-    //       }
-    //     }
-    //     else if(receptionusr==myid){
-    //       listTitleHtml =`<span class="receptionname">${receiptionusr}</span>`
-    //       listSubHtml = `<span class = "giftinfo">"${giftname}을 선물했습니다.."</span>`  
-    //     }
-    //     else{
-    //       alert("receptionusr 오류!")
-    //       return
-    //     }
-
-    //     $('#notice-list').append(`
-    //       <div class="list-content">
-    //         <img src="${usrimg}" class="usrimg">
-    //         <div class="list-context">
-    //           ${listTitleHtml}
-    //           ${listSubHtml}
-    //         </div>
-    //     `)
-    //   }
-    // }
-
   </script>
 </head>
 
@@ -147,40 +56,45 @@
 
   </nav>
 
-  <div class="notice-list" id ="notice-list">  
-    <!--javascript 에서 HTML element 삽입-->
-    <div class = "list-card">
-      <div class="list-content">
-        <img src=https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F6522%2F6522516.png&tbnid=NXIkVC8YMssN9M&vet=12ahUKEwj8jaT7nu6BAxX9QPUHHbYMBokQMygBegQIARBf..i&imgrefurl=https%3A%2F%2Fwww.flaticon.com%2Fkr%2Ffree-icon%2Fprofile_6522516&docid=rwyknLBXqCES5M&w=512&h=512&q=%ED%94%84%EB%A1%9C%ED%95%84%20%EC%95%84%EC%9D%B4%EC%BD%98&ved=2ahUKEwj8jaT7nu6BAxX9QPUHHbYMBokQMygBegQIARBf
-         class="usrimg">
-        <div class="list-context">
-          <span class="receptionname">김훈이</span>
-          <span class = "giftinfo">{{notifications[0]['giftname']}}을 선물했습니다.</span>
-        </div>
-        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fcreazilla.com%2Fko%2Fnodes%2F58674-clipart&psig=AOvVaw2wQQcx1TJytb2N3hn1ZeUE&ust=1697122468916000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCNDTzICg7oEDFQAAAAAdAAAAABAE"
-          class = "redcircle">
+  <div class="list">
+    <div style="cursor:pointer;" class="list-item" onclick=location.href='{{url_for("notification.notification_detail",id=10)}}'>
+      <div class="list-item-image">
+        <figure class="image is-64x64">
+          <img class="is-rounded" src="https://via.placeholder.com/128x128.png?text=Image">
+        </figure>
+      </div>
+  
+      <div class="list-item-content">
+        <div class="list-item-title">김 훈 이</div>
+        <div class="list-item-description">{{notifications[0]['giftname']}}을 선물했습니다.</div>
       </div>
     </div>
-    
-    <div class = "list-card">
-    </div>
-    <div class = "list-card">
-    </div>
-    <div class = "list-card">
-    </div>
-    <!--  <div class="list-content" id="list-content">
-        <img src="${usrimg}" class="usrimg">
-        <div class="context">
-          <span class="sendername"></span>
-          <span class = "giftinfo"></span>
-        </div>
+  
+    <div class="list-item">
+      <div class="list-item-image">
+        <figure class="image is-64x64">
+          <img class="is-rounded" src="https://via.placeholder.com/128x128.png?text=Image">
+        </figure>
       </div>
-
-    -->
-
-
-  </div>
-
+  
+      <div class="list-item-content">
+        <div class="list-item-title">List item</div>
+        <div class="list-item-description">List item description</div>
+      </div>
+    </div>
+  
+    <div class="list-item">
+      <div class="list-item-image">
+        <figure class="image is-64x64">
+          <img class="is-rounded" src="https://via.placeholder.com/128x128.png?text=Image">
+        </figure>
+      </div>
+  
+      <div class="list-item-content">
+        <div class="list-item-title">List item</div>
+        <div class="list-item-description">List item description</div>
+      </div>
+    </div>
 
 </body>
 
