@@ -20,14 +20,14 @@ def notification_list():
     return render_template('notification_list.html', notifications = notifications)    # 알림 목록 페이지
 
 
-@notification.route('/notification/<id>')
-def notification_detail(id):
-    notificationdetail = db.notification.find_one({'id':id})
+@notification.route('/notification/<notif_id>')
+def notification_detail(notif_id):
+    notificationdetail = db.notification.find_one({'id':notif_id})
     return render_template('notification.html', notificationdetail = notificationdetail)  # 알림 상세 페이지
 
-@notification.route('/notification/accept/<id>')
-def update_accept_received(id):
-    print("id : ", id)
+@notification.route('/notification/accept/<notif_id>')
+def update_accept_received(notif_id):
+    print("id : ", notif_id)
     db.notification.find_one_and_update({'id':10}, {'$set':{'ischeck':True}})
     db.notification.find_one_and_update({'id':10}, {'$set':{'isaccept':True}}, return_document=ReturnDocument.AFTER )
     returnnotification= db.notification.find_one({'id':10},{'_id':0})

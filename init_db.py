@@ -27,15 +27,16 @@ def insert_user():
 
 def insert_gift():
     doc ={
-        'id' : 10,
-        'giftimg' : "/img/launch.jpg",
-        'giftname' : "10월 15일 점심",
-        'giftmsg' : "밥먹자",
-        'sentusrid' : 1,
-        'sentusrname' : "김훈이",
-        'sentusrimg' : "/img/usrimg.png",
-        'receivedusrid' : 2,
-        'receivedusrname' : "김영희",
+        'notif-id' : 10,
+        'gift-img' : "/img/launch.jpg",
+        'gift-name' : "10월 15일 점심",
+        'gift-msg' : "밥먹자",
+        'snd-usr-id' : 1,
+        'snd-usr-name' : "김훈이",
+        'snd-usr-img' : "/img/usrimg.png",
+        'rcv-usr-id' : 2,
+        'rcv-usr-name' : "김영희",
+        'rcv-usrimg' : "/img/usrimg.png",
         'ischeck' : False,
         'isaccept' : False,
     }
