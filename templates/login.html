@@ -1,103 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "layout/head.html" %}
+{% block title %} {{ super() }} 로그인 페이지 {% endblock %}
+{% block link %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
-
-    <script src="http://code.jquery.com/jquery-latest.js"></script> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-    <title>로그인</title>
-</head>
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
 <style>
-  .top {font-family: 'Gamja Flower', cursive;}
-
-  .top .title{
-    font-size: 60px;
-    text-align: center;
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
   }
-  .main001 {
-     padding: 60px 150px 0px;
-     margin: 30px 0px;
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+  }
+  
+  .wrap {
+    width: 420px;
+  }
+  
+  h1 {
+    font-size: 36px;
+    text-align: center;
+  
+  }
+  
+  .input-box {
+    width: 100%;
+    height: 50px;
+  }
+  
+  </style>
+  <script>
+    function login() {
+        $.ajax({
+            type: "POST",
+            url: "/login",
+            data: {
+                id_give: $('#input_ID').val(),
+                pw_give: $('#input_PW').val(),
+            },
+            success: function (response) {
+                console.log(response)
+                if (response['result'] == 'success') {
+                    $.removeCookie('mytoken', { path: '/' })
+                    $.cookie('mytoken', response['token'],  { path: '/' });
+                    alert('로그인 되었습니다!')
+                     window.location.href = '/'
+                } else {
+                    alert(response['msg'])
+                }
+            }
+        })
     }
-    
-  .bottom{
-    padding: 20px 10px;
-    
-  }.bottom .control001{
-    padding: 10px;
-    text-align: center;
-    
-  }
-  .inbox{
-        width: 350px;
-        margin: auto;
-        padding: 10px 0px;
-        }
-</style>
-<script>
-  function login() {
-      $.ajax({
-          type: "POST",
-          url: "/login",
-          data: {
-              id_give: $('#input_ID').val(),
-              pw_give: $('#input_PW').val(),
-          },
-          success: function (response) {
-              console.log(response)
-              if (response['result'] == 'success') {
-                  $.cookie('mytoken', response['token']);
-                  alert('로그인 되었습니다!')
-                   window.location.href = '/mypage'
-              } else {
-                  alert(response['msg'])
-              }
-          }
-      })
-  }
-  function sign(){
-    window.location.href = '/sign'
-  }
-</script>
-
-<body>
-  <div class="wrap">
-    <div class="top">
-      <section class="hero is-info">
-        <div class="hero-body">
-          <p class="title">Gifted Jungle</p>
-        </div>
-      </section>
-    </div>
-    <div class="main001">
-      <div class="inbox">
-        <label class="label">ID</label>
-        <div class="control">
-          <input class="input" id ="input_ID" type="" placeholder="ID">
-        </div>
-      </div>
-
-      <div class="inbox">
-        <label class="label">Password</label>
-        <div class="control">
-          <input class="input" id ="input_PW" type="password" placeholder="Password">
-        </div>
+    function sign(){
+      window.location.href = '/sign'
+    }
+  </script>
+{% endblock %}
+{% block content %}
+<div class="wrap">
+  <h1>Login</h1>
+    <div class="inbox">
+      <label class="input-box">ID</label>
+        <input class="inbox" id ="input_ID" type="" placeholder="ID">
+        <box-icon type='solid' name='user'></box-icon>
       </div>
     </div>
-    <div class="bottom">
-      <p class="control001">
-        <button onclick="login()" class="button is-info">로그인</button>
-        <button onclick="sign()" class="button is-info is-outlined">회원가입</button>
-      </p>
+
+    <div class="inbox">
+      <label class="input-box">Password</label>
+      <div class="control">
+        <input class="input" id ="input_PW" type="password" placeholder="PW">
+        <box-icon type='solid' name='lock-alt'></box-icon>
+      </div>
     </div>
   </div>
-</body>
+  <div class="bottom">
+    <p class="control001">
+      <button onclick="login()" class="button is-info">로그인</button>
+      <button onclick="sign()" class="button is-info is-outlined">회원가입</button>
+    </p>
+  </div>
 
-</html>
+  {% endblock %}

@@ -74,7 +74,7 @@ def modify():
 
     pw_recieve=request.form['pw_give']
 
-    db.users.update_many({"id":payload["id"]},{'$set':{'pw':pw_recieve}}
+    db.users.update_many({"id":payload["id"]},{'$set':{'pw':pw_recieve}})
 
     return jsonify({"result": "success", "msg":"회원정보가 수정되었습니다."})
 

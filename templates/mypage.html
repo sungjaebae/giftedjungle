@@ -1,19 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "layout/head.html" %}
+{% block title %} {{ super() }} 마이 페이지 {% endblock %}
+{% block link %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
 
-    <!--구글폰트-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-latest.js"></script> 
-    <title>마이페이지</title>
-</head>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <style>
     .top {font-family: 'Gamja Flower', cursive;}
+
+    h1 {
+    font-size: 36px;
+    text-align: center;
+  
+  }
 
     #stuff{
     display: grid;
@@ -65,17 +67,16 @@
     }
 </style>
 <script>
-    function logout() {
-// 서버에 로그아웃 요청을 보내고 성공하면 로컬 스토리지 또는 쿠키에서 토큰을 삭제하고 로그아웃 처리
+    function logout() {     // 서버에 로그아웃 요청을 보내고 성공하면 로컬 스토리지 또는 쿠키에서 토큰을 삭제하고 로그아웃 처리
         $.ajax({
             type: "POST",
             url: "/mypage/logout",
             success: function (response) {
             if (response["result"] == "success") {
                 // 로컬 스토리지 또는 쿠키에서 토큰을 삭제
-                $.cookie('mytoken', null);
+                // $.cookie('mytoken', null);
                 alert("로그아웃 되었습니다.");
-                window.location.href = '/login';
+                window.location.href = '/';
             }
             }
         });
@@ -102,14 +103,10 @@
         window.location.href = '/'
         }
 </script>
-<body>
+{% endblock %}
+{% block content %}
     <div class="wrap">
-    <div class="top">
-        <section class="hero is-info">
-        <div class="hero-body">
-            <p class="title">마이페이지</p>
-        </div>
-        </section>
+        <h1>My Page</h1>
     <div class="main">
         <div id="main01" class="main01">
             <div class="tfield">
@@ -138,10 +135,9 @@
             <div class="control">
             <button class="button is-info is-light" onclick="cancel()">취소</button>
             </div>
-            <div class="control">
+          <div class="control">
             <button class="button is-info is-light" onclick="logout()">로그아웃</button>
-            </div>
+            </div>  
         </div>
     </div>
-</body>
-</html>
+{% endblock %}

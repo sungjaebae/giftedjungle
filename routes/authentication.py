@@ -8,7 +8,7 @@ SECRET_KEY = 'JUNGLE'
 
 client = MongoClient('localhost', 27017)
 db = client.dbgiftedjungle
-
+ 
 
 @authentication.route('/login', methods=['GET', 'POST'])
 def login():
@@ -24,7 +24,7 @@ def login():
             # JWT 토큰 생성
             payload = {
                 'id': id_recieve,
-                'exp': datetime.utcnow() + timedelta(hours=2)
+                'exp': datetime.utcnow() + timedelta(days=2)
             }
             token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
             return jsonify({'result': 'success', 'token': token})
@@ -68,9 +68,9 @@ def mypage():
 
         return render_template("mypage.html", user_info=userinfo)
     except jwt.ExpiredSignatureError:
-        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+        return redirect("/login")
     except jwt.exceptions.DecodeError:
-        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+        return redirect("/login")
 
 
 @authentication.route('/mypage/edit', methods=['POST'])
@@ -101,9 +101,15 @@ def logout():
 
         # 클라이언트에게 새로운 토큰을 전달하여 현재 토큰을 무효화
         response = jsonify({'result': 'success', 'msg': '로그아웃 되었습니다.'})
-        response.set_cookie('mytoken', new_token, httponly=True)
+        # response.set_cookie('mytoken', new_token, httponly=True)
+        response.delete_cookie('mytoken')
+
         return response
     except jwt.ExpiredSignatureError:
-        return jsonify({'result': 'fail', 'msg': '토큰이 이미 만료되었습니다.'})
+        response = jsonify({'result': 'fail', 'msg': '토큰이 이미 만료되었습니다.'})
+        return response
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '토큰 디코딩 오류'})
+
+
+ 

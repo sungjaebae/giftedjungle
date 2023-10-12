@@ -1,65 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "layout/head.html" %}
+{% block title %} {{ super() }} 회원가입 {% endblock %}
+{% block link %}
 
-    <!--구글폰트-->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-latest.js"></script> 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <title>회원가입</title>
-    <style>
-    </style>
-    <script>   
-        function postData() {
-            let name = $("#name").val();
-            let id = $("#input01").val();
-            let pw = $("#pw").val();
-            let pwConfirm = $("#pwConfirm").val();
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
-            if (pw !== pwConfirm) {
-                alert("비밀번호가 일치하지 않습니다.");
-                return;
-            }
+<style>
+h1 {
+    font-size: 36px;
+    text-align: center;
+  }
+</style>
 
-            if (!name || !id || !pw || !pwConfirm) {
-                alert("모든 필수 항목을 기재해야 합니다.");
-                return;
-            }
-            $.ajax({
-                type: "POST",
-                url: "/sign",
-                data: {
-                id_give: id,
-                pw_give: pw,
-                name_give: name
-                },
-                success: function(response) {
-                if (response["result"] == "success") {
-                    alert("회원가입 성공");
-                    window.location.href = '/'
-                } else {
-                    alert(response['msg']);
-                }
-                }
-            });
+<script>   
+    function postData() {
+        let name = $("#name").val();
+        let id = $("#input01").val();
+        let pw = $("#pw").val();
+        let pwConfirm = $("#pwConfirm").val();
+
+        if (pw !== pwConfirm) {
+            alert("비밀번호가 일치하지 않습니다.");
+            return;
         }
-        function cancel(){
-          window.location.href = '/'
-        }
-    </script>
-</head>
-<body>
-<section>
-    <p class="title">
-        Gifted Jungle
-    </p>
-</section>
 
+        if (!name || !id || !pw || !pwConfirm) {
+            alert("모든 필수 항목을 기재해야 합니다.");
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/sign",
+            data: {
+            id_give: id,
+            pw_give: pw,
+            name_give: name
+            },
+            success: function(response) {
+            if (response["result"] == "success") {
+                alert("회원가입 성공");
+                window.location.href = '/login'
+            } else {
+                alert(response['msg']);
+            }
+            }
+        });
+    }
+    function cancel(){
+        window.location.href = '/login'
+    }
+</script>
+{% endblock %}
+{% block content %}
+<h1>회원가입</h1>
 <section>
     <label class="label">이름</label>
         <input id="name" class="input" type="text" placeholder="이름">
@@ -76,5 +72,4 @@
     <button class="button is-info is-light" onclick="cancel()">취소</button>
 </section>
 
-</body>
-</html>
+{% endblock %}
