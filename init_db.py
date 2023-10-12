@@ -31,15 +31,14 @@ def insert_notification():
     doc ={
         'notif_id' : 10,
         'url' : "../static/images/food.webp",
-        #'gift-img' : "/img/launch.jpg",
         'giftname' : "10월 15일 점심",
         'giftmsg' : "밥먹자",
         'sndusrid' : 1,
         'sndusrname' : "김훈이",
-        #'snd-usr-img' : "/img/usrimg.png",
+        'sndusrimg' : "/images/usrimg.png",
         'rcvusrid' : 2,
         'rcvusrname' : "김영희",
-        #'rcv-usr-img' : "/img/usrimg.png",
+        'rcvusrimg' : "/images/usrimg.png",
         'ischeck' : False,
         'isaccept' : False,
     }
