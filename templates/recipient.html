@@ -1,0 +1,43 @@
+{% extends "layout/head.html" %} {% block title %} {{ super() }} 수령인 선택
+페이지 {% endblock %} {% block content %}
+<ul class="category-list list-group">
+  {% for user in users %}
+  <li
+    class="user-item list-group-item"
+    style="
+      text-align: center;
+      line-height: 3;
+      font-size: 1.5rem;
+      cursor: pointer;
+    "
+    onclick="setUser(event, '{{ user._id }}', '{{ user.name }}')"
+  >
+    {{user.name}}
+  </li>
+  {% endfor %}
+</ul>
+
+<form action="/process_gift" method="POST">
+  <input hidden name="gift_id" value="${{gift_id}}" />
+  <input hidden name="message" value="${{message}}" />
+  <input hidden name="recipient_id" value="" />
+  <button type="submit" class="btn btn-primary" disabled>
+    선물 수령인을 선택해주세요
+  </button>
+</form>
+{% endblock %} {% block script %}
+<script>
+  function setUser(e, id, name) {
+    const userItems = document.querySelectorAll(".user-item");
+    for (let userItem of userItems) {
+      userItem.classList.remove("active");
+    }
+    e.target.classList.add("active");
+    const button = document.querySelector("button");
+    button.disabled = false;
+    button.innerHTML = `${name}님에게 선물 보내기`;
+    const recipientId = document.querySelector("input[name=recipient_id]");
+    recipientId.value = id;
+  }
+</script>
+{% endblock %}

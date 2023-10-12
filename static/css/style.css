@@ -1,11 +1,12 @@
 a {color: #000; text-decoration: none; outline: none}
 a:hover, a:active {text-decoration: none; color:#000}
-
+html {
+  overflow-x: hidden;
+}
 
 .entire {
   width: 100vw; 
   display: flex;
-  padding: 0 20px;
 }
 
 .left_area {
@@ -14,8 +15,12 @@ a:hover, a:active {text-decoration: none; color:#000}
 
 .right_area {
   width: 100%;
-  height: 100vh;
   background-color: #eee;
+}
+
+.padding_area {
+  width: 30px;
+  height: 100vh;
 }
 
 @media (min-width: 540px) {
@@ -70,7 +75,14 @@ a:hover, a:active {text-decoration: none; color:#000}
   margin: 8px;
 }
 
-.ico_present {
+.ico_common2 {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin: 8px;
+}
+
+.ico_gift {
   overflow: hidden;
   color:transparent;
   background: url("./../icons/icon.png") no-repeat;
@@ -86,5 +98,5 @@ a:hover, a:active {text-decoration: none; color:#000}
 }
 
 .category-list {
-  overflow-y: scroll;
+  overflow-y: auto;
 }
