@@ -9,17 +9,17 @@ import json
 import sys
 
 
-
 notification = Blueprint('notification', __name__)
 client = MongoClient('localhost', 27017)
 db = client.dbgiftedjungle
+
 
 @notification.route('/notification')
 def notification_list():
 
     myid = request.args.get("myid", 0)
-    
-    notifications = list(db.notification.find({"receiptionusr" : myid}))
+
+    notifications = list(db.notification.find({"receiptionusr": myid}))
 
     # let giftname = notification['giftname']
     # let giftmsg = notification['giftmsg']
@@ -28,14 +28,14 @@ def notification_list():
     # let ischeck = notification['ischeck']
     #       let isaccept = notification['isaccept']
 
-
     # notifications = list(db.notification.find({"$or":[
     #     {"sentusr" : myid},
     #     {"receiptionusr" : myid}
     # ]}))
 
     notifications = list(db.notification.find({}))
-    return render_template('notification_list.html', notifications = notifications)    # 알림 목록 페이지
+    # 알림 목록 페이지
+    return render_template('notification_list.html', notifications=notifications)
 
 
 @notification.route('/notification/<id>')

@@ -12,7 +12,7 @@ import sys
 
 app = Flask(__name__)
 
-client = MongoClient('localhost', 27017)
+client: MongoClient = MongoClient('localhost', 27017)
 db = client.dbgiftedjungle
 
 

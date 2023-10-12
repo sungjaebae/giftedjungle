@@ -1,7 +1,7 @@
 from bson import ObjectId
 from flask import Blueprint, render_template, request, redirect, url_for
 from pymongo import MongoClient
-client = MongoClient('localhost', 27017)
+client: MongoClient = MongoClient('localhost', 27017)
 db = client.dbgiftedjungle
 
 gift = Blueprint('gift', __name__)

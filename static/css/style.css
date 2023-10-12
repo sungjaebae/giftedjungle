@@ -97,6 +97,14 @@ html {
   background-size: 24px 24px;
 }
 
+.ico_mypage {
+  overflow: hidden;
+  color:transparent;
+  background: url("./../icons/icon.png") no-repeat;
+  background-size: 200px 170px;
+  background-position: -122px -42px;
+}
+
 .category-list {
   overflow-y: auto;
 }
