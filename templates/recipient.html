@@ -18,8 +18,9 @@
 </ul>
 
 <form action="/process_gift" method="POST">
-  <input hidden name="gift_id" value="${{gift_id}}" />
-  <input hidden name="message" value="${{message}}" />
+  <input hidden name="gift_id" value="{{ gift_id }}" />
+  <input hidden name="message" value="{{ message }}" />
+  <input hidden name="sender_id" value="{{ sender_id }}" />
   <input hidden name="recipient_id" value="" />
   <button type="submit" class="btn btn-primary" disabled>
     선물 수령인을 선택해주세요

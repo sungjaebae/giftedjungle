@@ -9,7 +9,8 @@
   </div>
 </div>
 <form action="/recipient" method="POST">
-  <input hidden name="gift_id" value="${{gift._id}}" />
+  <input hidden name="gift_id" value="{{gift._id}}" />
+  <input hidden name="sender_id" value="{{sender._id}}" />
   <div class="mb-3 mt-3">
     <label for="message" class="form-label">선물 메시지</label>
     <textarea
