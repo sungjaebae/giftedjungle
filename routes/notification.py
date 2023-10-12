@@ -23,14 +23,14 @@ def notification_list():
 
 @notification.route('/notification/<notif_id>')
 def notification_detail(notif_id):
-    notificationdetail = db.notification.find_one({'notif_id':int(notif_id)})
+    notificationdetail = db.notification.find_one({'_id':int(notif_id)})
     return render_template('notification.html', notificationdetail = notificationdetail)  # 알림 상세 페이지
 
 @notification.route('/notification/accept/<notif_id>')
 def update_accept_received(notif_id):
-    db.notification.find_one_and_update({'notif_id':int(notif_id)}, {'$set':{'ischeck':True}})
-    db.notification.find_one_and_update({'notif_id':int(notif_id)}, {'$set':{'isaccept':True}}, return_document=ReturnDocument.AFTER )
-    returnnotification= db.notification.find_one({'notif_id':int(notif_id)},{'_id':0})
+    db.notification.find_one_and_update({'_id':int(notif_id)}, {'$set':{'ischeck':True}})
+    db.notification.find_one_and_update({'_id':int(notif_id)}, {'$set':{'isaccept':True}}, return_document=ReturnDocument.AFTER )
+    returnnotification= db.notification.find_one({'_id':int(notif_id)},{'_id':0})
     print(returnnotification)
     db.received.insert_one(returnnotification)
     return redirect(url_for('notification.received_gift'))
@@ -38,9 +38,9 @@ def update_accept_received(notif_id):
 
 @notification.route('/notification/refuse/<notif_id>')
 def update_refuse_received(notif_id):
-    db.notification.find_one_and_update({'notif_id':int(notif_id)}, {'$set':{'ischeck':True}})
-    db.notification.find_one_and_update({'notif_id':int(notif_id)}, {'$set':{'isaccept':False}}, return_document=ReturnDocument.AFTER )
-    returnnotification= db.notification.find_one({'notif_id':int(notif_id)},{'_id':0})
+    db.notification.find_one_and_update({'_id':int(notif_id)}, {'$set':{'ischeck':True}})
+    db.notification.find_one_and_update({'_id':int(notif_id)}, {'$set':{'isaccept':False}}, return_document=ReturnDocument.AFTER )
+    returnnotification= db.notification.find_one({'_id':int(notif_id)},{'_id':0})
     print(returnnotification)
     # db.received.insert_one(returnnotification)
     
