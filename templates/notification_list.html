@@ -1,187 +1,71 @@
-<!DOCTYPE html>
-<html lang="ko">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta title="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css" />
-
-  <script defer src="https://use.fontawesome.com/releases/v6.4.0/js/all.js"></script>
-
-  <title>Gifted Jungle</title>
-
-  <style>
+{% extends "layout/head.html" %} {% block title %} {{ super() }} 알림 목록 {%
+  endblock %}
     
-    /* .icon-leftarrow, .icon-bell, .icon-gift{
-      font-size :0;
-    } */
-    #notice-list{
-      width : 360px;
-      margin : 50px auto 0 auto;
-    }
-    #list-content{
-      width: 100%;
-      height: 123px;
-    }
-
-    .redcircle{
-      width: 30px;
-      height: 30px;
-    }
-
-  </style>
-
-  <script>
-    // let myid=2
-    // $(document).ready(function(){ 
-    //   let bellMode = false     
-      
-    //   /* 리스트 목록 게시 */
-    //   shownotificationList()
-
-    //   /* 조회 여부에 따라 알람 아이콘 변경 */
-    //   // displayBellMode(bellMode)
-    // });
-
-    // function shownotificationList(){
-
-    //   // // 리스트 박스 내부 태그 삭제
-    //   // $('#list-box').empty()
-
-    //   // $.ajax({
-    //   //   type: "GET",
-    //   //   url: "/notification",
-    //   //   data: {"myid" : 2},
-    //   //   // success: function(response){
-    //   //   //   if(response['result']!='success'){
-    //   //   //     alert('알람 리스트 받아오기 실패.')
-    //   //   //     return
-    //   //   //   }
-
-    //   //     let notifications = {{notification_list}}
-    //   //     addnotificationLists(notifications, myid)
-    //   //   },
-    //   // })
-
-    // }
-
-    // function addnotificationLists(notifications, myid){
-    //   if(notifications == null){
-    //     alert("알람이 존재하지 않습니다!")
-    //   }
-
-    //   else{
-    //     for(let i = 0; i<notifications.length;i++){
-    //       let notification  = notifications[i]
-    //       let giftname = notification['giftname']
-    //       let giftmsg = notification['giftmsg']
-    //       let sentusr = notification['sentusr']
-    //       let receiptionusr = notification['receiptionusr']
-    //       let ischeck = notification['ischeck']
-    //       let isaccept = notification['isaccept']
-    //     }
-
-    //     let listProfileHtml = `<img src="${usrimg}" class="usrimg">`
-    //     let listTitleHtml
-    //     let listSubHtml
-
-    //     if(sentusr==myid){
-    //       listTitleHtml =`<span class="receptionname">${receiptionusr}</span>`
-    //       if(ischeck==true){
-    //         switch(isaccept){
-    //           case true:
-    //           listSubHtml = `<span class = "giftinfo">"${giftname}을 수락했습니다."</span>`
-    //           break;
-
-    //           case false:
-    //           listSubHtml = `<span class = "giftinfo">"${giftname}을 거절했습니다."</span>`  
-    //           break;
-
-    //           default:
-    //           alert("isaccept 오류!")
-    //           return
-    //         }
-    //       }
-    //       else if(ischeck==false){
-    //         listSubHtml = `<span class = "giftinfo">"${giftname} 선물하는 중입니다."</span>`
-    //       }
-    //     }
-    //     else if(receptionusr==myid){
-    //       listTitleHtml =`<span class="receptionname">${receiptionusr}</span>`
-    //       listSubHtml = `<span class = "giftinfo">"${giftname}을 선물했습니다.."</span>`  
-    //     }
-    //     else{
-    //       alert("receptionusr 오류!")
-    //       return
-    //     }
-
-    //     $('#notice-list').append(`
-    //       <div class="list-content">
-    //         <img src="${usrimg}" class="usrimg">
-    //         <div class="list-context">
-    //           ${listTitleHtml}
-    //           ${listSubHtml}
-    //         </div>
-    //     `)
-    //   }
-    // }
-
-  </script>
-</head>
-
-<body>
+  {% block head %}
   
-  <!--상단바-->
-
-  <nav class="header-nav">
-    <span class="icon-leftarrow">뒤로가기</span>
-    <span class="header-name"> 알림목록 </span>
-    <span class="icon-bell">알림목록가기</span>
-    <span class="icon-gift">선물함가기</span>
-
-  </nav>
-
-  <div class="notice-list" id ="notice-list">  
-    <!--javascript 에서 HTML element 삽입-->
-    <div class = "list-card">
-      <div class="list-content">
-        <img src=https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F6522%2F6522516.png&tbnid=NXIkVC8YMssN9M&vet=12ahUKEwj8jaT7nu6BAxX9QPUHHbYMBokQMygBegQIARBf..i&imgrefurl=https%3A%2F%2Fwww.flaticon.com%2Fkr%2Ffree-icon%2Fprofile_6522516&docid=rwyknLBXqCES5M&w=512&h=512&q=%ED%94%84%EB%A1%9C%ED%95%84%20%EC%95%84%EC%9D%B4%EC%BD%98&ved=2ahUKEwj8jaT7nu6BAxX9QPUHHbYMBokQMygBegQIARBf
-         class="usrimg">
-        <div class="list-context">
-          <span class="receptionname">김훈이</span>
-          <span class = "giftinfo">{{notifications[0]['giftname']}}을 선물했습니다.</span>
-        </div>
-        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fcreazilla.com%2Fko%2Fnodes%2F58674-clipart&psig=AOvVaw2wQQcx1TJytb2N3hn1ZeUE&ust=1697122468916000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCNDTzICg7oEDFQAAAAAdAAAAABAE"
-          class = "redcircle">
+    <div class="group_head">
+      <a href="javascript:window.history.back();" class="icoback"><span class="ico_common ico_back"></span></a>
+      <h1 class="title">알림 목록</h1>
+      <nav class="_navbar">
+        <a href="/mypage"><span class="ico_common ico_mypage"></span></a>
+        <a href="/notification" onclick="location.href='notification.html'"><span class="ico_common ico_notification"></span></a>
+        <a href="/received_gift" onclick="location.href='received_gift.html'"><span class="ico_common ico_gift"></span></a>
       </div>
     </div>
+  {% endblock %}
     
-    <div class = "list-card">
-    </div>
-    <div class = "list-card">
-    </div>
-    <div class = "list-card">
-    </div>
-    <!--  <div class="list-content" id="list-content">
-        <img src="${usrimg}" class="usrimg">
-        <div class="context">
-          <span class="sendername"></span>
-          <span class = "giftinfo"></span>
-        </div>
+    
+  {% block content %}
+  <div class="list">
+    {%for i in range (notifications|count)%}
+    <div style="cursor:pointer;" class="list-item" onclick=location.href='{{url_for("notification.notification_detail",notif_id=10)}}'>
+      <div class="list-item-image">
+        <figure class="image is-64x64">
+          <img class="is-rounded" src="https://via.placeholder.com/128x128.png?text=Image">
+        </figure>
       </div>
-
-    -->
-
-
-  </div>
-
-
-</body>
-
-</html>
+      
+            <!-- 내가 보낸 선물인 경우 -->
+            {% if(notifications[i]['sndusrid'] == 2) %} <!-- myid=2 -->
+            <div class="list-item-content">
+              <div class="list-item-title">{{notifications[i]['rcv-usr-name']}}</div>
+              
+              <!-- 상대방이 확인하고 수락한 경우-->
+              {% if((notifications[i]['isccheck']==1)and(notifications[i]['isccheck']==1)): %}
+              <div class="list-item-description">님이 {{notifications[0]['gift-name']}} 선물을 수락했습니다.</div>
+      
+              <!-- 상대방이 확인하고 거절한 경우-->
+              {% elif((notifications[i]['isccheck']==1) and (notifications[i]['isccheck']==0)):%}
+              <div class="list-item-description">님이 {{notifications[0]['giftname']}} 선물을 거절했습니다.</div>
+              
+              {% else %}
+              <div class="list-item-description">error: notification_status</div>
+              {% endif %}
+            </div>
+      
+            <!-- 내가 받은 선물인 경우 -->
+            {% elif(notifications[i]['rcvusrid'] == 2) %} <!-- myid=2 -->
+            <div class="list-item-content">
+              <div class="list-item-title">  {{notifications[i]['sndusrname']}}</div>
+              
+              <!-- 내가 확인하지 않은 경우-->
+              {% if(notifications[i]['ischeck']==0) %}
+              <div class="list-item-description">님으로부터 {{notifications[0]['giftname']}} 선물이 도착했습니다.</div>        
+              
+              <!-- 내가 확인한 경우 -->
+              {% elif(notifications[i]['ischeck']==1) %}
+              <div class="list-item-description">님이 {{notifications[0]['sndusrname']}} 님의 선물을 확인했습니다.</div>
+      
+              {% else %}
+              <div class="list-item-description">error: notification_isaccept_status</div>
+              
+              {% endif %}
+            </div>
+      
+            {%else%}
+            <div class="list-item-title">ERROR</div>
+            <div class="list-item-description">rcv/snd usr</div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endblock %}

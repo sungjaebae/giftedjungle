@@ -1,12 +1,29 @@
-<!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
+{% extends "layout/head.html" %} {% block title %} {{ super() }} 선물함 {% endblock %} 
 
-    <meta title="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gifted Jungle</title>
-  </head>
-  <body>
-    받은 선물함 페이지
-  </body>
-</html>
+{% block head %}
+  
+    <div class="group_head">
+      <a href="javascript:window.history.back();" class="icoback"><span class="ico_common ico_back"></span></a>
+      <h1 class="title">받은 선물함</h1>
+      <nav class="_navbar">
+        <a href="/mypage"><span class="ico_common ico_mypage"></span></a>
+        <a href="/notification" onclick="location.href='notification.html'"><span class="ico_common ico_notification"></span></a>
+        <a href="/received_gift" onclick="location.href='received_gift.html'"><span class="ico_common ico_gift"></span></a>
+      </div>
+    </div>
+  {% endblock %}
+
+
+{% block content %}
+    <div class="list">
+      {% for received_gift in received %}  
+      <div class="card g-0">
+        <img src="{{received_gift.url}}" class="card-img-top"  alt="{{received_gift['giftname']}}"/>
+        <div class="card-body">
+          <h5 class="card-title" style="font-size: 1.5rem; font-weight:bold;">{{received_gift.giftname}} - {{received_gift.sndusrname}}</h5>
+          <p class="card-text">{{received_gift.giftmsg}}</p>
+        </div>
+      </div>   
+      {% endfor %}
+    </div>
+{%endblock%}
