@@ -126,13 +126,12 @@ h1 {
 </script>
 {% endblock %}
 {% block content %}
-<h1>Login</h1>
-  <div class="wrap">
+<div style="display: flex; flex-direction: column; align-items: center; width: 100%" class="wrap">
+    <h1 style="font-size: 32px;">Login</h1>
     <div class="inbox">
       <label class="input-box">ID</label>
         <input class="inbox" id ="input_ID" type="text" placeholder="ID">
         <box-icon type='solid' name='user'></box-icon>
-      </div>
     </div>
 
     <div class="inbox">
@@ -142,12 +141,12 @@ h1 {
         <box-icon type='solid' name='lock-alt'></box-icon>
       </div>
     </div>
-  </div>
   <div class="bottom">
     <p class="control001">
       <button onclick="login()" class="button is-info">로그인</button>
       <button onclick="sign()" class="button is-info is-outlined">회원가입</button>
     </p>
   </div>
+</div>
 
   {% endblock %}

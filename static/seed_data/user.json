@@ -2,16 +2,19 @@
   {
     "id": "qwer1",
     "pw": "asdf1",
-    "name": "배성재"
+    "name": "배성재",
+    "url": "/static/images/profile1.webp"
   },
   {
     "id": "qwer2",
     "pw": "asdf2",
-    "name": "이서영"
+    "name": "이서영",
+    "url": "/static/images/profile2.webp"
   },
   {
     "id": "qwer3",
     "pw": "asdf3",
-    "name": "조윤성"
+    "name": "조윤성",
+    "url": "/static/images/profile3.webp"
   }
 ]
