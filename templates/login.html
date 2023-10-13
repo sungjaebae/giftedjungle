@@ -10,70 +10,127 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-  }
-  
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.wrap {
+  width: 320px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center; /* 전체 폼 가운데 정렬 */
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.inbox {
+  margin: 10px 0;
+  text-align: left; /* 레이블과 입력 칸 왼쪽 정렬 */
+}
+
+.label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.inbox input {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.inbox box-icon[type='solid'] {
+  font-size: 18px;
+  color: #888;
+}
+
+.bottom {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.button {
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  margin-right: 10px;
+}
+
+.button.is-outlined {
+  background-color: transparent;
+  border: 2px solid #3498db;
+  color: #3498db;
+}
+
+.button:hover {
+  background-color: #257ab6;
+}
+
+.button.is-outlined:hover {
+  background-color: #3498db;
+  color: #fff;
+}
+
+</style>
+<script>
+  function login() {
+      $.ajax({
+          type: "POST",
+          url: "/login",
+          data: {
+              id_give: $('#input_ID').val(),
+              pw_give: $('#input_PW').val(),
+          },
+          success: function (response) {
+              console.log(response)
+              if (response['result'] == 'success') {
+                  $.removeCookie('mytoken', { path: '/' })
+                  $.cookie('mytoken', response['token'],  { path: '/' });
+                  alert('로그인 되었습니다!')
+                    window.location.href = '/'
+              } else {
+                  alert(response['msg'])
+              }
+          }
+      })
   }
-  
-  .wrap {
-    width: 420px;
+  function sign(){
+    window.location.href = '/sign'
   }
-  
-  h1 {
-    font-size: 36px;
-    text-align: center;
-  
-  }
-  
-  .input-box {
-    width: 100%;
-    height: 50px;
-  }
-  
-  </style>
-  <script>
-    function login() {
-        $.ajax({
-            type: "POST",
-            url: "/login",
-            data: {
-                id_give: $('#input_ID').val(),
-                pw_give: $('#input_PW').val(),
-            },
-            success: function (response) {
-                console.log(response)
-                if (response['result'] == 'success') {
-                    $.removeCookie('mytoken', { path: '/' })
-                    $.cookie('mytoken', response['token'],  { path: '/' });
-                    alert('로그인 되었습니다!')
-                     window.location.href = '/'
-                } else {
-                    alert(response['msg'])
-                }
-            }
-        })
-    }
-    function sign(){
-      window.location.href = '/sign'
-    }
-  </script>
+</script>
 {% endblock %}
 {% block content %}
-<div class="wrap">
-  <h1>Login</h1>
+<h1>Login</h1>
+  <div class="wrap">
     <div class="inbox">
       <label class="input-box">ID</label>
-        <input class="inbox" id ="input_ID" type="" placeholder="ID">
+        <input class="inbox" id ="input_ID" type="text" placeholder="ID">
         <box-icon type='solid' name='user'></box-icon>
       </div>
     </div>
