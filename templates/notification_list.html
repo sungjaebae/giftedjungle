@@ -36,7 +36,7 @@
               <div class="list-item-description" style="margin-left:50px">님이 {{one_notification.gift.name}} 선물을 수락했습니다.</div>
 
             <!-- 상대방이 확인하고 거절한 경우-->
-            {% elif((one_notification.is_read==true) and (one_notification.isccheck==true)):%}
+            {% elif((one_notification.is_read==true) and (one_notification.is_read==true)):%}
               <div class="list-item-description" style="margin-left:80px">님이 {{one_notification.gift.name}} 선물을 거절했습니다.</div>
     
             {% else %}
@@ -61,7 +61,7 @@
               <div class="list-item-description" style="margin-left:80px">error: notification_isaccept_status</div>
             {% endif %}
           </div>
-        {%else%}
+        {% else %}
         <div class="list-item-content">
           <div class="list-item-title">ERROR</div>
           <div class="list-item-description" style="margin-left:80px">rcv/snd usr</div>
