@@ -20,8 +20,8 @@
       <div class="card g-0">
         <img src="{{received_gift.url}}" class="card-img-top"  alt="{{received_gift['giftname']}}"/>
         <div class="card-body">
-          <h5 class="card-title" style="font-size: 1.5rem; font-weight:bold;">{{received_gift.giftname}} - {{received_gift.sndusrname}}</h5>
-          <p class="card-text">{{received_gift.giftmsg}}</p>
+          <h5 class="card-title" style="font-size: 1.5rem; font-weight:bold;">{{received.gift.name}} - {{received.gift.sender.name}}</h5>
+          <p class="card-text">{{received.gift.giftmsg}}</p>
         </div>
       </div>   
       {% endfor %}
