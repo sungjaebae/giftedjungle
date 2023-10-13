@@ -3,9 +3,9 @@
 
 <div class="card g-0">
   <img
-    src="{{ notificationdetail.url}}"
+    src="{{ notificationdetail.gift.url }}"
     class="card-img-top"
-    alt="$({{notificationdetail.giftname}})"
+    alt="{{ notificationdetail.giftname }}"
   />
   <div clas="card-body"></div>
 </div>
@@ -26,21 +26,14 @@
     aria-label="Basic mixed styles example"
     style="font-size: 1rem; margin: 0px 80px"
   >
-    <button
-      type="button"
-      class="btn btn-success"
-      onclick="location.href='/received_gift'"
-    >
-      수락
-    </button>
-    <button
-      type="button"
-      class="btn btn-danger"
-      onclick="history.back()"
-      class="btn btn-primary"
-    >
-      거절
-    </button>
+    <form action="/process_accept" method="POST">
+      <input hidden name="notif_id" value="{{notificationdetail._id}}" />
+      <button type="submit" class="btn btn-success">수락</button>
+    </form>
+    <form action="/process_deny" method="POST">
+      <input hidden name="notif_id" value="{{notificationdetail._id}}" />
+      <button type="submit" class="btn btn-danger">거절</button>
+    </form>
   </div>
 </div>
 
