@@ -3,7 +3,7 @@ import json
 client: MongoClient = MongoClient('localhost', 27017)
 db = client.dbgiftedjungle
 # db.user.deleteMany({})
-# db.notification.deleteMany({})
+# db.notifications.deleteMany({})
 
 
 def insert_user():
@@ -27,7 +27,7 @@ def insert_notification():
         'ischeck' : False,
         'isaccept' : False,
     }
-    db.notification.insert_one(doc)
+    db.notifications.insert_one(doc)
 
 
 def insert_category():

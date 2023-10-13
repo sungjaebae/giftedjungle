@@ -33,11 +33,11 @@ def notification_detail(notif_id):
 
 @notification.route('/notification/accept/<notif_id>')
 def update_accept_received(notif_id):
-    db.notification.find_one_and_update(
+    db.notifications.find_one_and_update(
         {'_id': notif_id}, {'$set': {'is_read': True}})
-    db.notification.find_one_and_update({'_id': notif_id}, {
+    db.notifications.find_one_and_update({'_id': notif_id}, {
                                         '$set': {'is_deleted': False}}, return_document=ReturnDocument.AFTER)
-    returnnotification = db.notification.find_one(
+    returnnotification = db.notifications.find_one(
         {'_id': notif_id}, {'_id': 0})
     print(returnnotification)
     db.received.insert_one(returnnotification)
@@ -47,23 +47,26 @@ def update_accept_received(notif_id):
 
 @notification.route('/notification/refuse/<notif_id>')
 def update_refuse_received(notif_id):
-    db.notification.find_one_and_update(
+    db.notifications.find_one_and_update(
         {'_id': notif_id}, {'$set': {'is_read': True}})
-    db.notification.find_one_and_update({'_id': notif_id}, {
+    db.notifications.find_one_and_update({'_id': notif_id}, {
                                         '$set': {'is_deleted': False}}, return_document=ReturnDocument.AFTER)
-    returnnotification = db.notification.find_one(
+    returnnotification = db.notifications.find_one(
         {'_id': notif_id}, {'_id': 0})
     print(returnnotification)
     # db.received.insert_one(returnnotification)
 
-    notifications = list(db.notification.find({}))
+    notifications = list(db.notifications.find({}))
     # return redirect(url_for('notification.notification_list'))
     return render_template('notification_list.html', notifications=notifications)
 
 
 @notification.route('/received_gift')
 def received_gift():
-    received = list(db.notification.find(
+    notifications = list(db.notifications.find(
+        {"$or": [{"sender.id": user["id"]}, {"recipient.id": user["id"]}]}))
+    
+    received = list(db.notifications.find(
         {'$and': [{'is_read': True}, {'is_deleted': False}]}))
     # 받은 선물함 페이지
     return render_template('received_gift.html', received=received)
