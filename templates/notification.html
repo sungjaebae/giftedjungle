@@ -12,11 +12,11 @@
 <article class="message is-success" style="margin-top: 5px">
   <div class="message-header">
     <p style="font-size: 1.2rem">
-      {{notifications.gift.name}} - {{notifications.sender.name}}
+      {{notificationdetail.gift.name}} - {{notificationdetail.sender.name}}
     </p>
   </div>
   <div style="font-size: 1rem" class="message-body">
-    {{notification.gift.description}}
+    {{notificationdetail.gift.description}}
   </div>
 </article>
 <div class="d-grid gap-2">
@@ -30,7 +30,7 @@
       type="button"
       class="btn btn-success"
       onclick="location.href"
-      ="{{url_for('notification.update_accept_received',notif_id=notifications._id)}}"
+      ="{{url_for('notification.update_accept_received',notif_id=notificationdetail._id)}}"
     >
       수락
     </button>

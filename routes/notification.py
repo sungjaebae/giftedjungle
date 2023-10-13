@@ -25,8 +25,9 @@ def notification_list():
 
 @notification.route('/notification/<notif_id>')
 def notification_detail(notif_id):
-    notificationdetail = db.notifications.find_one({'_id': notif_id})
+    notificationdetail = db.notifications.find_one({'_id': ObjectId(notif_id)})
     # 알림 상세 페이지
+    print(notificationdetail)
     return render_template('notification.html', notificationdetail=notificationdetail)
 
 
