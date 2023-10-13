@@ -8,13 +8,13 @@
 </div>
 <article class="message is-success" style="margin-top : 5px">
   <div class="message-header">
-    <p style="font-size:1.2rem">{{notifications.gift.name']}} - {notifications.sender.name']}}</p>
+    <p style="font-size:1.2rem">{{notificationdetail.gift.name}} - {notificationdetail.sender.name}}</p>
   </div>
-  <div style="font-size:1.0rem" class="message-body">{{notification.gift.description']}} </div>
+  <div style="font-size:1.0rem" class="message-body">{{notificationdetail.gift.description}} </div>
 </article>
 <div class="d-grid gap-2">
   <div class="btn-group" role="group" aria-label="Basic mixed styles example" style = "font-size:1.0rem; margin: 0px 80px;">
-    <button type="button" class="btn btn-success" onclick=location.href="{{url_for('notification.update_accept_received',notif_id=notifications._id}}">수락</button>
+    <button type="button" class="btn btn-success" onclick=location.href="{{url_for('notification.update_accept_received',notif_id=notifications._id)}}">수락</button>
     <button type="button" class="btn btn-danger" onclick="history.back()" class="btn btn-primary" >거절</button>
   </div>
 </div>

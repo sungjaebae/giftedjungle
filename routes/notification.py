@@ -15,10 +15,10 @@ def notification_list():
     token_receive = request.cookies.get('mytoken')
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
     user = db.users.find_one({'id': payload['id']}, {})
-    notifications = list(db.notifications.find({}))
+    notifications = list(db.notifications.find({'$or':[{'sender':'user['id']'}, {notifications.recipient.id: 'user['id']'}]}))
     print(notifications)
     # 알림 목록 페이지
-    return render_template('notification_list.html', notifications=notifications, myid=user)
+    return render_template('notification_list.html', notifications=notifications, myid=user['id'])
 
 
 @notification.route('/notification/<notif_id>')
