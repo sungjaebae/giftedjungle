@@ -1,6 +1,6 @@
 from bson import ObjectId
 from flask import Blueprint, render_template, request, redirect, url_for
-from pymongo import MongoClient
+from pymongo import MongoClient, ReturnDocument
 import jwt
 
 
