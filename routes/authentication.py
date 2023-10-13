@@ -16,7 +16,6 @@ def login():
         id_recieve = request.form['id_give']
         pw_recieve = request.form['pw_give']
 
-        # id, 암호화된 pw을 가지고 해당 유저를 찾습니다.
         result = db.users.find_one({'id': id_recieve, 'pw': pw_recieve})
 
         # JWT 토큰 발급
@@ -54,6 +53,15 @@ def join():
         db.users.insert_one(
             {'id': id_recieve, 'pw': pw_recieve, 'name': name_recieve})
 
+        return jsonify({'result': 'success'})
+    
+@authentication.route('/sign/check', methods =["POST"])
+def checkID():
+   id_recieve = request.form["id_give"]
+   result = db.users.find_one({'id': id_recieve})
+   if result is not None:
+        return jsonify({'result': 'fail', 'msg': '이미 사용중인 ID입니다'})
+   else:
         return jsonify({'result': 'success'})
 
 
@@ -110,3 +118,10 @@ def logout():
         return response
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '토큰 디코딩 오류'})
+    
+@authentication.route('/mypage/delete', methods=["POST"])
+def delete():
+    token_receive = request.cookies.get('mytoken')    
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    db.users.delete_one({"id":payload["id"]})
+    return jsonify({'result':'success', 'msg': '회원탈퇴 되었습니다.'})

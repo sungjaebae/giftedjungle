@@ -11,11 +11,21 @@
 <style>
     .top {font-family: 'Gamja Flower', cursive;}
 
+    .wrap {
+        text-align: left;
+    }
+
     h1 {
     font-size: 36px;
     text-align: center;
   
-  }
+    }
+
+    .list-item-image {
+    display: flex; /* 부모 요소를 Flex Container로 만듭니다. */
+    justify-content: center;
+    align-items: center;
+    }
 
     #stuff{
     display: grid;
@@ -102,42 +112,88 @@
     function cancel(){
         window.location.href = '/'
         }
+    
+    function del_id(){
+    $.ajax({
+            type: 'POST',
+            url: '/mypage/delete',
+            data: {},
+            success: function (response) {
+                if (response['result'] == 'success'){
+                    alert('회원탈퇴 완료!');
+                    window.location.href = '/login';
+                    }
+                }
+            });
+
+    }
+</script>
+<script>
+    // 파일 입력 엘리먼트 가져오기
+    const fileInput = document.getElementById('image-upload');
+    // 이미지 엘리먼트 가져오기
+    const uploadedImage = document.getElementById('uploaded-image');
+    
+    // 파일 입력 변경 이벤트 처리
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                uploadedImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 </script>
 {% endblock %}
 {% block content %}
-    <div class="wrap">
-        <h1>My Page</h1>
-    <div class="main">
-        <div id="main01" class="main01">
-            <div class="tfield">
-                <label class="label">이름</label>
-                <div class="control">
-                    <input id="id" class="input" type="text" value="{{user_info.name}}" readonly>
-                </div>
-            </div>
-            <div class="tfield">
-                <label class="label">ID</label>
-                <div class="control">
-                    <input id="id" class="input" type="text" value="{{user_info.id}}" readonly>
-                </div>
-            </div>
-            <div class="tfield">
-                <label class="label">PW</label>
-                <div class="control">
-                <input id="pw" class="input" type="text" value="{{user_info.pw}}">
-                </div>
-            </div>
-    <div class="bottom">
-        <div class="field is-grouped" style="justify-content: center;">
+<div class="wrap">
+    <h1>My Page</h1>
+    <div class="list-item-image">
+        <figure class="image is-64x64">
+            <img class="is-rounded" id="uploaded-image" src="https://via.placeholder.com/128x128.png?text=Image">
+        </figure>
+    </div>
+    <input type="file" id="image-upload" accept="image/*">
+<div class="main">
+    <div id="main01" class="main01">
+        <div class="tfield">
+            <label class="label">이름</label>
             <div class="control">
-            <button class="button is-info" onclick="edit()">수정</button>
+                <input id="id" class="input" type="text" value="{{user_info.name}}" readonly>
             </div>
+        </div>
+        <div class="tfield">
+            <label class="label">ID</label>
             <div class="control">
-            <button class="button is-info is-light" onclick="cancel()">취소</button>
+                <input id="id" class="input" type="text" value="{{user_info.id}}" readonly>
             </div>
-          <div class="control">
-            <button class="button is-info is-light" onclick="logout()">로그아웃</button>
-            </div>  
+        </div>
+        <div class="tfield">
+            <label class="label">PW</label>
+            <div class="control">
+            <input id="pw" class="input" type="text" value="{{user_info.pw}}">
+            </div>
         </div>
     </div>
+</div>
+<div class="bottom">
+    <div class="field is-grouped" style="justify-content: center;">
+        <div class="control">
+        <button class="button is-info" onclick="edit()">수정</button>
+        </div>
+        <div class="control">
+        <button class="button is-info is-light" onclick="cancel()">취소</button>
+        </div>
+        <div class="control">
+        <button class="button is-info is-light" onclick="logout()">로그아웃</button>
+        </div>
+        <div class="control">
+            <button class="button is-info is-outlined" onclick="del_id()">회원탈퇴</button>
+        </div>
+      
+    </div>
+</div>
+</div>
 {% endblock %}
