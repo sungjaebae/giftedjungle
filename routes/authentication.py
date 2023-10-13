@@ -123,5 +123,7 @@ def logout():
 def delete():
     token_receive = request.cookies.get('mytoken')    
     payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    response = jsonify({'result':'success', 'msg': '회원탈퇴 되었습니다.'})
+    response.delete_cookie('mytoken')
     db.users.delete_one({"id":payload["id"]})
-    return jsonify({'result':'success', 'msg': '회원탈퇴 되었습니다.'})
+    return response

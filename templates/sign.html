@@ -71,10 +71,8 @@ h1 {
 </script>
 {% endblock %}
 {% block content %}
-<h1>회원가입</h1>
+<h1 style="font-size: 32px;">회원가입</h1>
 <section>
-    <label class="label">이름</label>
-        <input id="name" class="input" type="text" placeholder="이름">
     <label class="label">ID</label>
         <input id="input01" class="input" type="text" placeholder="ID">
         <button class="button is-info" onclick="checkID()">중복 확인</button>
@@ -82,6 +80,8 @@ h1 {
         <input id="pw" class="input" type="password" placeholder="PW">
     <label class="label">비밀번호 확인</label>
         <input id="pwConfirm" class="input" type="password" placeholder="비밀번호 확인">
+    <label class="label">이름</label>
+        <input id="name" class="input" type="text" placeholder="이름">
 </section>
 
 <section>
