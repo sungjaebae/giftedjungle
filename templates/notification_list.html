@@ -18,59 +18,56 @@
   {% block content %}
   <div class="list">
     {%for one_notification in notifications%}
-    <div style="cursor:pointer;" class="list-item" onclick=location.href='{{url_for("notification.notification_detail",notif_id=one_notification._id)}}'>
-      
-            <!-- 내가 보낸 선물인 경우 -->
-            {% if(one_notification.sndusrid == 2) %}>  <!--my_id=2 토큰 대체-->
-            <div class="list-item-image">
-              <figure class="image is-64x64">
-                <img class="is-rounded" src="{{one_notification.rcvusrimg}}">
-              </figure>
-            </div>
-            <div class="list-item-content" >
-              <div class="list-item-title">{{one_notification.rcvusrname}}</div>
-              
-              <!-- 상대방이 확인하고 수락한 경우-->
-              {% if((one_notification.ischeck==1)and(one_notification.isaccept==1)): %}
-              <div class="list-item-description" style="margin-left:50px">님이 {{one_notification.giftname}} 선물을 수락했습니다.</div>
-      
-              <!-- 상대방이 확인하고 거절한 경우-->
-              {% elif((one_notification.isccheck==1) and (one_notification.isccheck==0)):%}
-              <div class="list-item-description" style="margin-left:80px">님이 {{one_notification.giftname}} 선물을 거절했습니다.</div>
-              
-              {% else %}
-              <div class="list-item-description" style="margin-left:80px">error: notification_status</div>
-              {% endif %}
-            </div>
-      
-            <!-- 내가 받은 선물인 경우 -->
-            {% elif(one_notification.rcvusrid == 2) %} <!-- myid=2 -->
-            <div class="list-item-image">
-              <figure class="image is-64x64">
-                <img class="is-rounded" src="{{one_notification.sndusrimg}}">
-              </figure>
-            </div>
-            <div class="list-item-content">
-              <div class="list-item-title">  {{one_notification.sndusrname}}</div>
-              
-              <!-- 내가 확인하지 않은 경우-->
-              {% if(one_notification.ischeck==0) %}
-              <div class="list-item-description" style="margin-left:80px">님으로부터 {{one_notification.giftname}} 선물이 도착했습니다.</div>        
-              
-              <!-- 내가 확인한 경우 -->
-              {% elif(one_notification.ischeck==1) %}
-              <div class="list-item-description" style="margin-left:80px">님의 선물을 확인했습니다.</div>
-      
-              {% else %}
-              <div class="list-item-description" style="margin-left:80px">error: notification_isaccept_status</div>
-              
-              {% endif %}
-            </div>
-      
-            {%else%}
-            <div class="list-item-title">ERROR</div>
-            <div class="list-item-description" style="margin-left:80px">rcv/snd usr</div>
-            {% endif %}
-          {% endfor %}
+    <!-- 프로필 사진 영역-->
+      <div style="cursor:pointer;" class="list-item" onclick=location.href='{{url_for("notification.notification_detail",notif_id=10)}}'>
+        <div class="list-item-image">
+          <figure class="image is-64x64">
+            <img class="is-rounded" src="https://via.placeholder.com/128x128.png?text=Image">
+          </figure>
         </div>
-      {% endblock %}
+  
+        <!-- 내가 보낸 선물인 경우 -->
+        {% if(one_notification.sender.id == myid) %}> 
+          <div class="list-item-content" >
+            <div class="list-item-title">{{one_notification.recipient.name}}</div>
+    
+            <!-- 상대방이 확인하고 수락한 경우-->
+            {% if((one_notification.is_read==true)and(one_notification.is_deleted==false)): %}
+              <div class="list-item-description" style="margin-left:50px">님이 {{one_notification.gift.name}} 선물을 수락했습니다.</div>
+
+            <!-- 상대방이 확인하고 거절한 경우-->
+            {% elif((one_notification.is_read==true) and (one_notification.isccheck==true)):%}
+              <div class="list-item-description" style="margin-left:80px">님이 {{one_notification.gift.name}} 선물을 거절했습니다.</div>
+    
+            {% else %}
+              <div class="list-item-description" style="margin-left:80px">error: notification_status</div>
+            {% endif %}
+          </div>
+
+        <!-- 내가 받은 선물인 경우 -->
+        {% elif(one_notification.recipient.id == myid) %}
+          <div class="list-item-content">
+            <div class="list-item-title">  {{one_notification.sender.name}}</div>
+
+            <!-- 내가 확인하지 않은 경우-->
+            {% if(one_notification.is_read==false) %}
+              <div class="list-item-description" style="margin-left:80px">님으로부터 {{one_notification.gift.name}} 선물이 도착했습니다.</div>        
+        
+            <!-- 내가 확인한 경우 -->
+            {% elif(one_notification.is_read==true) %}
+              <div class="list-item-description" style="margin-left:80px">님의 선물을 확인했습니다.</div>
+
+            {% else %}
+              <div class="list-item-description" style="margin-left:80px">error: notification_isaccept_status</div>
+            {% endif %}
+          </div>
+        {%else%}
+        <div class="list-item-content">
+          <div class="list-item-title">ERROR</div>
+          <div class="list-item-description" style="margin-left:80px">rcv/snd usr</div>
+        </div>
+        {% endif %}
+      </div>
+    {% endfor %}     
+  </div>
+  {% endblock %}

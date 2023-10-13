@@ -20,10 +20,10 @@ def insert_notification():
         'giftmsg' : "밥먹자",
         'sndusrid' : 1,
         'sndusrname' : "김훈이",
-        'sndusrimg' : "/images/usrimg.png",
+        'sndusrimg' : "../static/images/usrimg.png",
         'rcvusrid' : 2,
         'rcvusrname' : "김영희",
-        'rcvusrimg' : "/images/usrimg.png",
+        'rcvusrimg' : "../static/images/usrimg.png",
         'ischeck' : False,
         'isaccept' : False,
     }
